@@ -35,6 +35,8 @@ module NavigationHelpers
         post_path(User.find_by_email($1).posts.find_by_text($2))
       when /^"(\/.*)"/
         $1
+      when /the project page for "([^\"]*)"/
+        project_path(Project.find_by_name!($1))
       else
         raise "Can't find mapping from \"#{page_name}\" to a path."
     end
