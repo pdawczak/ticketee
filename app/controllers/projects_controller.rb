@@ -34,4 +34,9 @@ class ProjectsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    Project.destroy params[:id]
+    redirect_to root_path, :notice => "Project has been deleted."
+  end
 end

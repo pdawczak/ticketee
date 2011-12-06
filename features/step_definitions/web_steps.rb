@@ -182,7 +182,8 @@ Then /^(?:|I )should not see "([^\"]*)"$/ do |text|
   if defined?(Spec::Rails::Matchers)
     response.should_not contain(text)
   else
-    assert_not_contain text
+    # assert_not_contain text
+    page.should_not have_content text
   end
 end
 
