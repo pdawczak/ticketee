@@ -7,3 +7,11 @@
 <%= link_to "Delete Project", @project, :method => :delete, :confirm => 'Are you sure you want to delete this project?' %>
 
 <%= link_to "New Ticket", new_project_ticket_path(@project) %>
+
+<ul>
+  <% for ticket in @project.tickets %>
+    <li>
+      #<%= ticket.id %> - <%= link_to ticket.title, [@project, ticket] %>
+    </li>
+  <% end %>
+</ul>

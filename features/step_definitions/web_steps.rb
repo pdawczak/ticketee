@@ -153,7 +153,9 @@ Then /^(?:|I )should see "([^\"]*)" within "([^\"]*)"$/ do |text, selector|
     if defined?(Spec::Rails::Matchers)
       content.should contain(text)
     else
-      assert content.include?(text)
+      # assert content.include?(text)
+      # find(selector).should have_content text
+      page.should have_content text 
     end
   end
 end
