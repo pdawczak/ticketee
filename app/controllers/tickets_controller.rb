@@ -31,6 +31,11 @@ class TicketsController < ApplicationController
     end
   end
 
+  def destroy
+    Ticket.destroy params[:id]
+    redirect_to @project, :notice => "Ticket has been deleted."
+  end
+
   private
 
     def find_project
