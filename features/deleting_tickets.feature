@@ -4,8 +4,12 @@ Feature: Deleting tickets
   I want to press a button and make them disappear
 
   Background:
-    Given there is a project called "TextMate 2"
-    And that project has a ticket:
+    Given there are the following users:
+      | email             | password |
+      | user@ticketee.com | password |
+    And I am signed in as them
+    And there is a project called "TextMate 2"
+    And "user@ticketee.com" has created a ticked for this project:
       | title                 | description                   |
       | Make it shiny!        | Gradients! Starburst! Oh my!  |
     Given I am on homepage
