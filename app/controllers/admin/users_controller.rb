@@ -1,6 +1,12 @@
 class Admin::UsersController < Admin::BaseController
+  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
+
   def index
     @users = User.all :order => "email"
+  end
+
+  def show
+    
   end
 
   def new
@@ -9,7 +15,8 @@ class Admin::UsersController < Admin::BaseController
 
   def create
     @user = User.new params[:user]
-    @user.admin = params[:user][:admin] == "1"
+    
+    set_admin
     if @user.save
       redirect_to admin_users_path, :notice => "User has been created."
     else
@@ -17,4 +24,33 @@ class Admin::UsersController < Admin::BaseController
       render :new
     end
   end
+
+  def edit
+    
+  end
+
+  def update
+    if params[:user][:password].blank?
+      params[:user].delete :password
+      params[:user].delete :password_confirmation
+    end
+
+    set_admin
+    if @user.update_attributes params[:user]
+      redirect_to admin_users_path, :notice => "User has been updated."
+    else
+      flash[:alert] = "User has not been updated."
+      render :new
+    end
+  end
+  
+  private
+    
+    def find_user
+      @user = User.find params[:id]
+    end
+
+    def set_admin
+      @user.admin = params[:user][:admin] == "1"
+    end
 end
