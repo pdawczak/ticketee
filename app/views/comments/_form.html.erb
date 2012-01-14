@@ -1,0 +1,12 @@
+<strong>New Comment</strong>
+<%= form_for [@ticket, @comment] do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :text %>
+    <%= f.text_field :text %>
+  </p>
+
+  <%= f.submit %>
+  
+<% end %>
